@@ -25,10 +25,10 @@ server.Get("/style", make_localhost_handler([&](const Request req, Response &res
   res.set_content(ct, "text/css");
 }));
 
-server.Get("/close", [&](Request req, Response res) {
+server.Get("/close", make_localhost_handler([&](Request req, Response res) {
   res.set_content("closed", "text/plain");
   server.stop();
-});
+}));
 
 //assets public serverd
 serve_public(server, "/assets", "./assets");
